@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<H1>Grammn's Blog</H1>
+	{% for post in post_list %}
+		<h3><a href="/blog/{{ post.pk }}/">{{ post.subject }}</a></h3>
+		<div>
+			{{ post.created }}
+		</div>
+		<div>
+			{{ post.body|safe|linebreaks }}
+		</div>
+		
+		<div>
+			{% for tag in post.tags.all %}
+				<a href="/blog/tag/{{tag}}/">{{ tag }}</a>
+				{% if not forloop.last %}
+				,
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endfor %}	
+		
+{% endblock %}
