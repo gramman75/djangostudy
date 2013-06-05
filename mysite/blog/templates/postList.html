@@ -2,7 +2,8 @@
 
 {% block content %}
 	<H1>Grammn's Blog</H1>
-	{% for post in post_list %}
+	{% for post in posts %}
+		{% autoescape on %}
 		<h3><a href="/blog/{{ post.pk }}/">{{ post.subject }}</a></h3>
 		<div>
 			{{ post.created }}
@@ -19,6 +20,16 @@
 				{% endif %}
 			{% endfor %}
 		</div>
+		{% endautoescape %}
 	{% endfor %}	
+	
+	<div class="pager">
+		{% if posts.has_previous %}
+			<li class="previous"><a href="/blog?page={{ posts.previous_page_number }}">&larr; Previous</a></li>
+		{% endif %}
 		
+		{% if posts.has_next %}
+			<li class="next"><a href="/blog?page={{ posts.next_page_number }}">&rarr; Next</a></li>
+		{% endif %}
+	</div>
 {% endblock %}

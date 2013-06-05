@@ -10,14 +10,17 @@ def tagPage(request, tag):
                                             , context_instance=RequestContext(request))
 
 def posts(request,page=1):
-    post_list = Post.objects.all()
+    post_list = Post.objects.order_by("-created") 
     paginator = Paginator(post_list,2)
-    try:
-        posts = paginator(page)
-    except PageNotAnInteger:
-        posts = paginator(1)
-    except EmptyPage:
-        posts = paginator(paginator.num_pages)
+    #paginator.orphans = 2
     
-    return render_to_respons(postList.html,{'posts':posts}
-                                          ,context_instance = RequesetContext(request))
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    
+    return render_to_response("postList.html",{'posts':posts}
+                                          ,context_instance = RequestContext(request))
