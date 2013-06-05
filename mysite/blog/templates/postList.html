@@ -9,7 +9,7 @@
 			{{ post.created }}
 		</div>
 		<div>
-			{{ post.body|linebreaks }}
+			{{ post.body|safe|linebreaks }}
 		</div>
 		
 		<div>
