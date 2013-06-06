@@ -9,7 +9,7 @@
 			{{ post.created }}
 		</div>
 		<div>
-			{{ post.body|safe|linebreaks }}
+			{{ post.body|safe|linebreaks|truncatechars:100 }}
 		</div>
 		
 		<div>
@@ -21,5 +21,14 @@
 			{% endfor %}
 		</div>
 	{% endfor %}	
+
+	<div class="pager">
+	{% if post_list.has_previous %}
+		<li class="previous"><a href="/blog/tag/{{ tag }}/?page={{ post_list.previous_page_number}}">&larr;Previous</a></li>
+	{% endif %}
+	{% if post_list.has_next %}
+		<li class="next"><a href="/blog/tag/{{ tag }}/?page={{ post_list.next_page_number }}">&rarr;Next</a></li>
+	{% endif %}
+	</div>
 		
 {% endblock %}

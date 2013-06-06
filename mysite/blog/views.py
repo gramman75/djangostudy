@@ -19,7 +19,7 @@ def tagPage(request, tag):
                                                "tag" : tag}
                                             , context_instance=RequestContext(request))
 
-def posts(request,page=1):
+def posts(request):
     post_list = Post.objects.order_by("-created") 
     paginator = Paginator(post_list,5)
     #paginator.orphans = 2
@@ -34,3 +34,8 @@ def posts(request,page=1):
     
     return render_to_response("postList.html",{'posts':posts, 'archives':post_list}
                                           ,context_instance = RequestContext(request))
+
+def post(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    
