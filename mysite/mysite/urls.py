@@ -2,15 +2,16 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import ListView, DetailView
 from blog.models import Post
 from blog.views import tagPage
+from django.views.generic import ListView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('blog.views',
-    #url(r'^blog/$',ListView.as_view(
+    #url(r'^blog/archive/$',ListView.as_view(
     #                queryset = Post.objects.order_by("-created"),
-    #                context_object_name='post_list',
-    #                template_name="postList.html")),
+    #                context_object_name='archives',
+    #                template_name="archive.html")),
     
     url(r'^blog/$','posts'),
     url(r'blog/(?P<pk>\d+)/$',DetailView.as_view(

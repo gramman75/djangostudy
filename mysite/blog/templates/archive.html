@@ -1,0 +1,4 @@
+	{% for archive in archives %}
+		<p class="text-info"><a href="/blog/{{ pk }}">{{ archive.subject }}</a></p>
+		<p class-"muted"><small>{{ archive.created|date:"Y-m-d H:i:s " }}</small></p>
+	{% endfor %}
