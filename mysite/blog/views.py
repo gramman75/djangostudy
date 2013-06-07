@@ -38,4 +38,10 @@ def posts(request):
 def post(request, pk):
     post = Post.objects.get(pk=pk)
 
-    
+    prev_post = Post.objects.filter(created__lt=post.created).order_by("-created")[0:1]
+    next_post= Post.objects.filter(created__gt=post.created).order_by("created")[0:1]
+    print prev_post
+    return render_to_response("postDetail.html",{'post' : post,
+                                                 'prev_post':prev_post,
+                                                 'next_post':next_post}
+                                               ,context_instance=RequestContext(request))

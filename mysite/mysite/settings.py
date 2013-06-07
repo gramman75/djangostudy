@@ -1,3 +1,4 @@
+#-*- encoding:utf8 -*-
 # Django settings for mysite project.
 
 DEBUG = True
@@ -155,3 +156,36 @@ LOGGING = {
         },
     }
 }
+
+# 미들웨어 클래스에 django debug toolbar 추가
+
+MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+
+
+# 설치 앱 항목에 추가
+
+INSTALLED_APPS += ('debug_toolbar',)
+
+
+# 툴바를 보여줄 IP를 지정
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+# 툴바에 표시할 아이템을 지정
+
+DEBUG_TOOLBAR_PANELS = (
+
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+
+)
+
+
+
