@@ -21,4 +21,5 @@ urlpatterns = patterns('blog.views',
     url(r'blog/(?P<pk>\d+)/$','post'),
     url(r'blog/tag/(?P<tag>\w+)/$',tagPage),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^blog/search/$','search')
 )

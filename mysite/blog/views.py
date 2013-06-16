@@ -3,10 +3,11 @@ from django.template import RequestContext
 from blog.models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+
 def tagPage(request, tag):
     post_list = Post.objects.filter(tags__name=tag)
     archives = Post.objects.all()
-    paginator = Paginator(post_list,5)
+    paginator = Paginator(post_list, 5)
     page = request.GET.get('page')
 
     try:
@@ -14,14 +15,15 @@ def tagPage(request, tag):
     except PageNotAnInteger:
         posts = paginator.page(1)
 
-    return render_to_response("tagPage.html", {"post_list" : posts,
-                                               "archives" : archives,
-                                               "tag" : tag}
-                                            , context_instance=RequestContext(request))
+    return render_to_response("tagPage.html", {"post_list": posts, 
+                                               "archives": archives, 
+                                               "tag": tag}
+                                            , context_instance=
+                                            RequestContext(request))
 
 def posts(request):
     post_list = Post.objects.order_by("-created") 
-    paginator = Paginator(post_list,5)
+    paginator = Paginator(post_list, 5)
     #paginator.orphans = 2
     
     page = request.GET.get('page')
@@ -34,7 +36,7 @@ def posts(request):
     
     return render_to_response("postList.html",{'posts':posts, 'archives':post_list}
                                           ,context_instance = RequestContext(request))
-
+# 127.0.0.1:8000/blog/
 def post(request, pk):
     post = Post.objects.get(pk=pk)
 
@@ -45,3 +47,8 @@ def post(request, pk):
                                                  'prev_post':prev_post,
                                                  'next_post':next_post}
                                                ,context_instance=RequestContext(request))
+def search(request):
+    searchword = request.GET.get("search_text")
+    posts = Post.objects.filter(subject__contains=searchword)
+    return render_to_response("searchResult.html", {'posts':posts},
+                                                context_instance=RequestContext(request))
