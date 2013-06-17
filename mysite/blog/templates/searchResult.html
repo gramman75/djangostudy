@@ -1,5 +1,5 @@
-<ul>
+<ul class="unstyled">  
 	{% for post in posts %}
-		<li> {{ post.subject }}</li>
+		<li><a href="/blog/{{ post.pk }}">{{ post.subject }}</a></li>
 	{% endfor %}
 </ul>

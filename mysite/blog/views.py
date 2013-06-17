@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from blog.models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def tagPage(request, tag):
@@ -39,13 +40,20 @@ def posts(request):
 # 127.0.0.1:8000/blog/
 def post(request, pk):
     post = Post.objects.get(pk=pk)
+    post_list = Post.objects.order_by("-created") 
+    try:
+        prev_post = Post.objects.filter(created__lt=post.created).order_by("-created")[0:1].get()
+    except ObjectDoesNotExist: 
+        prev_post = None
 
-    prev_post = Post.objects.filter(created__lt=post.created).order_by("-created")[0:1]
-    next_post= Post.objects.filter(created__gt=post.created).order_by("created")[0:1]
-    print prev_post
+    try:
+        next_post= Post.objects.filter(created__gt=post.created).order_by("created")[0:1].get()
+    except ObjectDoesNotExist:
+        next_post = None
     return render_to_response("postDetail.html",{'post' : post,
                                                  'prev_post':prev_post,
-                                                 'next_post':next_post}
+                                                 'next_post':next_post,
+                                                 'archives':post_list}
                                                ,context_instance=RequestContext(request))
 def search(request):
     searchword = request.GET.get("search_text")

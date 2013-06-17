@@ -20,11 +20,11 @@
 		</div>
 		<div class="pager">
 			{% if prev_post %}
-				<li class="previous"><a href="/blog/{{ prev_post.pk }}">&larr;{{ prev_post|truncatechars:30 }}</a></li>
+				<li class="previous"><a href="/blog/{{ prev_post.pk }}">&larr;{{ prev_post.subject|truncatechars:30 }}</a></li>
 			{% endif %}
 
 			{% if next_post %}
-				<li class="next"><a href="/blog/{{ next_post.pk }}">&rarr;{{ next_post|truncatechars:30 }}</a></li>
+				<li class="next"><a href="/blog/{{ next_post.pk }}">&rarr;{{ next_post.subject|truncatechars:30 }}</a></li>
 			{% endif %}
 		</div>
 {% endblock %}
