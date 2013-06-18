@@ -9,7 +9,12 @@
 	</head>
 	<body>
 		<div class="page-header">
-			<br>
+			<div class="offset12"><button class="btn btn-mini" type="submit">SignUp</button></div>
+			{% if request.user.is_authenticated %}
+			<div class="offset12"><button class="btn btn-mini" type="submit"><a href="/blog/logout/">Logout</a></button></div>
+			{% else %}
+			<div class="offset12"><button class="btn btn-mini" type="submit"><a href="/blog/login/">Login</a></button></div>
+			{% endif %}
 		</div>
 		<div class="container-fluid">
 			<div class="row-fluid">

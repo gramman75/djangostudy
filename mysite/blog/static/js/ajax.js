@@ -1,4 +1,4 @@
-$(function  () {
+$(function() {
 	$("#search").keyup(function() {
 		$.ajax({
 					url: '/blog/search',

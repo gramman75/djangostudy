@@ -21,5 +21,13 @@ urlpatterns = patterns('blog.views',
     url(r'blog/(?P<pk>\d+)/$','post'),
     url(r'blog/tag/(?P<tag>\w+)/$',tagPage),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/search/$','search')
+    url(r'^blog/search/$','search'),
+    # url(r'^blog/login/$','django.contrib.auth.views.login',{'template_name':'login.html'}),
 )
+
+urlpatterns += patterns('',
+    url(r'^blog/login/$','django.contrib.auth.views.login',{'template_name':'login.html'}),
+    url(r'^blog/logout/$','django.contrib.auth.views.logout',{'template_name':'logout.html'}),
+    url(r'^blog/signup/$','signup'),
+
+    )

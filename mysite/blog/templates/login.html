@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+		{% load url from future %}
+		{% block content %}
+		<form class="form-horizontal" method="POST" action=" {% url 'django.contrib.auth.views.login' %}">
+		{% csrf_token %}
+				<fieldset>
+					<legend>Login</legend>
+					<div class="control-group">
+						<label class="control-label" for="userName">User Name</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="userName">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="password">Password</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="password">
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Login</button>
+						<button class="btn">Cancel</button>
+					</div>
+				</fieldset>
+			</form>		
+     	</form>
+{% endblock %}
